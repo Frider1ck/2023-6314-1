@@ -15,6 +15,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Store } from './Store';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignupScreen from './screens/SignupScreen';
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -23,6 +24,7 @@ function App() {
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('shippingAddress');
   };
   return (
     <BrowserRouter>
@@ -75,6 +77,10 @@ function App() {
             <Route path='/product/:id' element={<ProductScreen/>}/>
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/signin" element={<SigninScreen />} />
+            <Route
+                path="/shipping"
+                element={<ShippingAddressScreen />}
+            ></Route>
             <Route path="/signup" element={<SignupScreen />} />
             <Route path='/' element={<HomeScreen/>}/>
           </Routes> 
