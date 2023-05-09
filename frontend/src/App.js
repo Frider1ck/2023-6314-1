@@ -22,6 +22,7 @@ import Button from 'react-bootstrap/Button';
 import { getError } from './utils';
 import axios from 'axios';
 import SearchBox from './components/SearchBox';
+import SearchScreen from "./screens/SearchScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -35,46 +36,19 @@ function App() {
       window.location.href = '/signin';
   };
 
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await axios.get(`/api/products/categories`);
-        setCategories(data);
-      } catch (err) {
-        toast.error(getError(err));
-      }
-    };
-    fetchCategories();
-  }, []);
 
   return (
     <BrowserRouter>
-      <div
-          className={
-            sidebarIsOpen
-                ? 'd-flex flex-column site-container active-cont'
-                : 'd-flex flex-column site-container'
-          }
-      >
       <ToastContainer position="bottom-center" limit={1} />
       <header>
          <Navbar bg="dark" variant="dark">
-            <Container>
-              <Button
-                  variant="dark"
-                  onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
-              >
-                <i className="fas fa-bars"></i>
-              </Button>
+            <Container style={{display: 'flex', justifyContent: 'space-between'}}>
 
               <LinkContainer to="/">
                 <Navbar.Brand>Online Shop</Navbar.Brand>
               </LinkContainer>
-              <Nav className="me-auto">
-                <SearchBox />
+              <Nav>
                 <Link to="/cart" className="nav-link">
                   Корзина
                   {cart.cartItems.length > 0 && (
@@ -84,12 +58,9 @@ function App() {
                   )}
                 </Link>
                 {userInfo ? (
-                    <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                    <NavDropdown title={userInfo.name} id="basic-nav-dropdown" drop={'down-centered'}>
                       <LinkContainer to="/profile">
                         <NavDropdown.Item>User Profile</NavDropdown.Item>
-                      </LinkContainer>
-                      <LinkContainer to="/orderhistory">
-                        <NavDropdown.Item>Order History</NavDropdown.Item>
                       </LinkContainer>
                       <NavDropdown.Divider />
                       <Link
@@ -105,34 +76,11 @@ function App() {
                       Вход
                     </Link>
                 )}
+                  <SearchBox />
               </Nav>
             </Container>
           </Navbar>
       </header>
-
-        <div
-            className={
-              sidebarIsOpen
-                  ? 'active-nav side-navbar d-flex justify-content-between flex-wrap flex-column'
-                  : 'side-navbar d-flex justify-content-between flex-wrap flex-column'
-            }
-        >
-          <Nav className="flex-column text-white w-100 p-2">
-            <Nav.Item>
-              <strong>Categories</strong>
-            </Nav.Item>
-            {categories.map((category) => (
-                <Nav.Item key={category}>
-                  <LinkContainer
-                      to={`/search?category=${category}`}
-                      onClick={() => setSidebarIsOpen(false)}
-                  >
-                    <Nav.Link>{category}</Nav.Link>
-                  </LinkContainer>
-                </Nav.Item>
-            ))}
-          </Nav>
-        </div>
 
       <main>
         <Container  className="mt-3">
@@ -144,7 +92,8 @@ function App() {
                 path="/shipping"
                 element={<ShippingAddressScreen />}
             ></Route>
-            <Route path="/signup" element={<SignupScreen />} />
+              <Route path="/search" element={<SearchScreen />} />
+              <Route path="/signup" element={<SignupScreen />} />
             <Route path="/profile" element={<ProfileScreen />} />
             <Route path='/' element={<HomeScreen/>}/>
           </Routes> 
@@ -153,7 +102,6 @@ function App() {
       <footer>
           <div className="text-center">All rights reserved</div>
       </footer>
-    </div>
     </BrowserRouter>
   );
 }

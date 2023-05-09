@@ -1,11 +1,10 @@
 import React, { useContext, useReducer, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import axios from 'axios';
+import { Card, ListGroup } from 'react-bootstrap';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -62,47 +61,24 @@ export default function ProfileScreen() {
     };
 
     return (
-        <div className="container small-container">
+        <div className="container">
             <Helmet>
                 <title>User Profile</title>
             </Helmet>
             <h1 className="my-3">User Profile</h1>
-            <form onSubmit={submitHandler}>
-                <Form.Group className="mb-3" controlId="name">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="name">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="password">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="password">
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <div className="mb-3">
-                    <Button type="submit">Update</Button>
-                </div>
-            </form>
+            <Card>
+                <Card.Body>
+                    <Card.Title>Мой аккаунт</Card.Title>
+                    <ListGroup variant="flush">
+                        <ListGroup.Item>
+                            <strong>Имя: </strong>{name}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <strong>Email: </strong>{email ? email : '-'}
+                        </ListGroup.Item>
+                    </ListGroup>
+                </Card.Body>
+            </Card>
         </div>
     );
 }
