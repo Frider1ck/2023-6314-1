@@ -27,10 +27,6 @@ export default function ProfileScreen() {
     const [email, setEmail] = useState(userInfo.email);
     const [password, setPassword] = useState('');
 
-    const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
-        loadingUpdate: false,
-    });
-
 
     return (
         <div className="container">
