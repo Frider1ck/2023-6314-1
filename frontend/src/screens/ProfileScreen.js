@@ -1,9 +1,6 @@
-import React, { useContext, useReducer, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Store } from '../Store';
-import { toast } from 'react-toastify';
-import { getError } from '../utils';
-import axios from 'axios';
 import { Card, ListGroup } from 'react-bootstrap';
 
 const reducer = (state, action) => {
