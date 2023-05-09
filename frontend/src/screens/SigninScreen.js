@@ -32,7 +32,6 @@ export default function SigninScreen() {
       localStorage.setItem('userInfo', JSON.stringify(data));
       document.cookie = `Refresh=${data.refresh}`
 
-
       localStorage.setItem('user', JSON.stringify({email, password}));
 
       navigate(redirect || '/');
