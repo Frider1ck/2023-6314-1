@@ -31,33 +31,6 @@ export default function ProfileScreen() {
         loadingUpdate: false,
     });
 
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        try {
-            const { data } = await axios.put(
-                '/api/users/profile',
-                {
-                    name,
-                    email,
-                    password,
-                },
-                {
-                    headers: { Authorization: `Bearer ${userInfo.token}` },
-                }
-            );
-            dispatch({
-                type: 'UPDATE_SUCCESS',
-            });
-            ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-            localStorage.setItem('userInfo', JSON.stringify(data));
-            toast.success('User updated successfully');
-        } catch (err) {
-            dispatch({
-                type: 'FETCH_FAIL',
-            });
-            toast.error(getError(err));
-        }
-    };
 
     return (
         <div className="container">
