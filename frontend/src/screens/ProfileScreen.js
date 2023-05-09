@@ -6,7 +6,6 @@ import { Card, ListGroup } from 'react-bootstrap';
 export default function ProfileScreen() {
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const userInf = JSON.parse(localStorage.getItem('user'));
-    const { userInfo } = state;
     return (
         <div className="container small-container">
             <Helmet>
