@@ -47,9 +47,6 @@ export default function SearchScreen() {
         return products.filter(product => product.name.toLowerCase().includes(SearchRequest.toLowerCase()))
     }
 
-    console.log(SearchRequest)
-    console.log(filterProducts(products));
-
     return(
         <>
             <Helmet>
