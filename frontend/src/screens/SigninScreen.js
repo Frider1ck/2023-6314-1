@@ -33,7 +33,7 @@ export default function SigninScreen() {
       document.cookie = `Refresh=${data.refresh}`
 
 
-      console.log(data);
+      localStorage.setItem('user', JSON.stringify({email, password}));
 
       navigate(redirect || '/');
     } catch (err) {
