@@ -6,20 +6,6 @@ import { getError } from '../utils';
 import axios from 'axios';
 import { Card, ListGroup } from 'react-bootstrap';
 
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'UPDATE_REQUEST':
-            return { ...state, loadingUpdate: true };
-        case 'UPDATE_SUCCESS':
-            return { ...state, loadingUpdate: false };
-        case 'UPDATE_FAIL':
-            return { ...state, loadingUpdate: false };
-
-        default:
-            return state;
-    }
-};
-
 export default function ProfileScreen() {
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const userInf = JSON.parse(localStorage.getItem('user'));
