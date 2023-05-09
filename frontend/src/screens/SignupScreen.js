@@ -9,8 +9,6 @@ import { Store } from '../Store';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 
-///api/auth/login
-
 export default function SignupScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
