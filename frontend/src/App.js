@@ -31,7 +31,8 @@ function App() {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
-    window.location.href = '/signin';
+      document.cookie = 'Refresh='
+      window.location.href = '/signin';
   };
 
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);

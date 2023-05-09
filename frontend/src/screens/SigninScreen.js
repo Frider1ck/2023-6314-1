@@ -23,12 +23,18 @@ export default function SigninScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await Axios.post('/api/users/signin', {
+      const { data } = await Axios.post('http://localhost:8075/api/auth/login', {
         email,
         password,
       });
+
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
       localStorage.setItem('userInfo', JSON.stringify(data));
+      document.cookie = `Refresh=${data.refresh}`
+
+
+      console.log(data);
+
       navigate(redirect || '/');
     } catch (err) {
       toast.error(getError(err));
