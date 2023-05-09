@@ -67,6 +67,5 @@ export default function SearchScreen() {
                         ))}
                     </Row>)}
             </div>
-
         </>)
 }
