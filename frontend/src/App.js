@@ -23,6 +23,9 @@ import { getError } from './utils';
 import axios from 'axios';
 import SearchBox from './components/SearchBox';
 import SearchScreen from "./screens/SearchScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import OrderScreen from "./screens/OrderScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -32,6 +35,8 @@ function App() {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
+      localStorage.removeItem('paymentMethod');
+
       document.cookie = 'Refresh='
       window.location.href = '/signin';
   };
@@ -95,7 +100,10 @@ function App() {
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
             <Route path="/profile" element={<ProfileScreen />} />
-            <Route path='/' element={<HomeScreen/>}/>
+              <Route path="/placeorder" element={<PlaceOrderScreen />} />
+              <Route path="/order/:id" element={<OrderScreen />}></Route>
+              <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+              <Route path='/' element={<HomeScreen/>}/>
           </Routes> 
         </Container>                  
       </main>
